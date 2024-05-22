@@ -9,23 +9,26 @@ import ContactPage from "./pages/ContactPage/ContactPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import AuthProvider from "./Components/AuthContext";
 
 function App() {
   const title = "Cars App";
 
   return (
     <section className="App">
-      <Header title={title} />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cars" element={<CarsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-      <Footer />
+      <AuthProvider>
+        <Header title={title} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/cars" element={<CarsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <Footer />
+      </AuthProvider>
     </section>
   );
 }

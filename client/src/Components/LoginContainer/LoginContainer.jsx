@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../AuthContext";
 import "./LoginContainer.css";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
@@ -6,6 +7,7 @@ import api from "../api";
 function LoginContainer(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { logout, accessToken, login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -22,6 +24,8 @@ function LoginContainer(props) {
       const accessToken = response.headers["access-token"];
 
       localStorage.setItem("accessToken", accessToken);
+      login(accessToken);
+
       localStorage.setItem("userName", user.firstName);
 
       navigate(-1);
@@ -34,10 +38,8 @@ function LoginContainer(props) {
     }
   };
 
-  let accessToken = localStorage.getItem("accessToken");
-
   const removeAccessToken = () => {
-    accessToken = null;
+    logout();
     localStorage.clear();
     window.location.reload();
   };

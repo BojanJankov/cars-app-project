@@ -55,6 +55,15 @@ export class UsersService {
     await this.userRepo.save(foundUser);
   }
 
+  // Created just for clearing database from refresh tokens when testing
+  async deleteAllRefreshTokens(id: string) {
+    const foundUser = await this.getUserbyId(id);
+
+    foundUser.refreshTokens = [];
+
+    await this.userRepo.save(foundUser);
+  }
+
   async deleteUser(id: string) {
     const foundUser = await this.getUserbyId(id);
 

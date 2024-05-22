@@ -14,7 +14,9 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { AuthGuard } from 'src/auth/auth.quard';
 
+@UseGuards(AuthGuard)
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
 export class UsersController {
@@ -44,5 +46,12 @@ export class UsersController {
   @HttpCode(204)
   deleteUser(@Param('id') id: string) {
     return this.userService.deleteUser(id);
+  }
+
+  // Created just for clearing database from refresh tokens when testing
+  @Delete('/deleteRefreshTokens/:id')
+  @HttpCode(204)
+  deleteAllRefrehsTokens(@Param('id') id: string) {
+    return this.userService.deleteAllRefreshTokens(id);
   }
 }
