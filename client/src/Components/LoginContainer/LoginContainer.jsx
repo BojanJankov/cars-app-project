@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./LoginContainer.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api";
 
 function LoginContainer(props) {
   const [email, setEmail] = useState("");
@@ -12,25 +12,19 @@ function LoginContainer(props) {
     event.preventDefault();
 
     try {
-      const response = await axios
-        .post("http://localhost:3000/api/auth/login", {
-          email,
-          password,
-        })
-        .then((response) => response.json())
-        .then((response) => {
-          console.log(response.headers);
-        });
+      const response = await api.post("api/auth/login", {
+        email,
+        password,
+      });
 
       const user = response.data;
 
       const accessToken = response.headers["access-token"];
 
-      console.log(user);
-      console.log(response.headers);
-
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userName", user.firstName);
+
+      navigate(-1);
     } catch (error) {
       console.log(error);
       if (error) {
@@ -38,9 +32,32 @@ function LoginContainer(props) {
         setEmail("");
       }
     }
-
-    navigate(-1);
   };
+
+  let accessToken = localStorage.getItem("accessToken");
+
+  const removeAccessToken = () => {
+    accessToken = null;
+    localStorage.clear();
+    window.location.reload();
+  };
+
+  console.log(accessToken);
+
+  if (accessToken !== null) {
+    return (
+      <>
+        <div className="logout-container">
+          <h1>Logout</h1>
+          <h2>Are you sure you want to log out?</h2>
+          <p>You can log out here if you want:</p>
+          <button className="logout-button" onClick={removeAccessToken}>
+            Log out
+          </button>
+        </div>
+      </>
+    );
+  }
 
   return (
     <div className="login-container">

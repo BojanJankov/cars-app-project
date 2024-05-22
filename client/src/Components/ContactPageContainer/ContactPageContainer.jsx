@@ -15,35 +15,35 @@ function ContactPageContainer(props) {
       <div className="ContactInfoDiv">
         <h3>{props.formHeader}</h3>
         <form>
-          <div class="form-container">
-            <div class="row50">
-              <div class="inputBox">
+          <div className="form-container">
+            <div className="row50">
+              <div className="inputBox">
                 <span>First Name</span>
                 <input type="text" placeholder={props.holderName} />
               </div>
-              <div class="inputBox">
+              <div className="inputBox">
                 <span>Last Name</span>
                 <input type="text" placeholder={props.holderLastName} />
               </div>
             </div>
-            <div class="row50">
-              <div class="inputBox">
+            <div className="row50">
+              <div className="inputBox">
                 <span>Email</span>
                 <input type="text" placeholder={props.holderEmail} />
               </div>
-              <div class="inputBox">
+              <div className="inputBox">
                 <span>Mobile</span>
                 <input type="text" placeholder="+389 72 123 456" />
               </div>
             </div>
-            <div class="row100">
-              <div class="inputBox">
+            <div className="row100">
+              <div className="inputBox">
                 <span>{props.textAreaHeader}</span>
                 <textarea placeholder="Write your message here..."></textarea>
               </div>
             </div>
-            <div class="send-button">
-              <div class="inputBox">
+            <div className="send-button">
+              <div className="inputBox">
                 <button type={props.buttonType} onClick={handleClick}>
                   {props.buttonText}
                 </button>

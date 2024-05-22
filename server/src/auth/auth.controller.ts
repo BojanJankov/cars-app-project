@@ -31,6 +31,7 @@ export class AuthController {
 
     response.set('access-token', accessToken);
     response.set('refresh-token', refreshToken);
+    response.setHeader('Access-Control-Expose-Headers', 'access-token');
 
     return response.json(user);
   }
