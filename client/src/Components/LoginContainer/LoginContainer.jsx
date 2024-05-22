@@ -42,8 +42,6 @@ function LoginContainer(props) {
     window.location.reload();
   };
 
-  console.log(accessToken);
-
   if (accessToken !== null) {
     return (
       <>

@@ -1,35 +1,86 @@
 import "./RegisterContainer.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import api from "../api";
 
 function RegisterContainer(props) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await api.post("api/auth/register", {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      window.location.href = "/login";
+    } catch (error) {
+      console.log(error);
+      if (error) {
+        setFirstName("");
+        setLastName("");
+        setPassword("");
+        setEmail("");
+      }
+    }
+  };
   return (
-    <div class="register-container">
+    <div className="register-container">
       <h1>Register</h1>
       <form action="" method="POST">
-        <div class="txt-field">
-          <input type="text" name="firstName" required />
+        <div className="txt-field">
+          <input
+            type="text"
+            name="text"
+            required
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
           <span></span>
           <label>FirstName</label>
         </div>
-        <div class="txt-field">
-          <input type="text" name="lastName" required />
+        <div className="txt-field">
+          <input
+            type="text"
+            name="text"
+            required
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
           <span></span>
           <label>LastName</label>
         </div>
-        <div class="txt-field">
-          <input type="email" name="email" required />
+        <div className="txt-field">
+          <input
+            type="email"
+            name="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <span></span>
           <label>Email</label>
         </div>
-        <div class="txt-field">
-          <input type="password" name="password" required />
+        <div className="txt-field">
+          <input
+            type="password"
+            name="password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <span></span>
           <label>Password</label>
         </div>
-        <button name="submit" type="Submit">
+        <button name="submit" type="Submit" onClick={handleRegister}>
           Register
         </button>
-        <div class="signup_link">
+        <div className="signup_link">
           You have account ? <Link to={props.link}>Log In</Link>
         </div>
       </form>
