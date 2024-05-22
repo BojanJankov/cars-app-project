@@ -1,0 +1,16 @@
+.HomePageButton {
+  font-weight: 400;
+  font-size: 22px;
+  padding: 5px;
+  color: black;
+  background-color: #48d1cc;
+  border-radius: 5px;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: transform 1s;
+}
+
+.HomePageButton:hover {
+  background-color: #429e9d;
+  transform: translate(0px, -5px);
+}

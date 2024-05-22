@@ -1,0 +1,25 @@
+.Navbar ul {
+  display: flex;
+  list-style: none;
+  padding: 10px 0;
+  text-decoration: none;
+}
+
+.Navbar ul li {
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.Navbar ul li a {
+  text-decoration: none;
+  color: black;
+  padding: 7px;
+  transition: 0.2s ease-in;
+}
+
+.active {
+  background-color: #429e9d;
+  border-radius: 4px;
+}

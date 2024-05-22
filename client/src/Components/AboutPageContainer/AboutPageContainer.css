@@ -1,0 +1,22 @@
+.AboutContainer {
+  width: 700px;
+  height: 450px;
+  background-color: #48d1cc;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.AboutContainer h1 {
+  font-weight: 700;
+  font-size: 34px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.AboutContainer p {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 20px 40px;
+  text-align: start;
+}

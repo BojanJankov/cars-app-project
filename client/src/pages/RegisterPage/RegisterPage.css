@@ -1,0 +1,6 @@
+.RegisterPage {
+  height: 576px;
+  background-color: #e0ffff;
+  display: grid;
+  place-items: center;
+}

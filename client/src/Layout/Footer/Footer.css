@@ -1,0 +1,13 @@
+.Footer {
+  background-color: #48d1cc;
+  color: black;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Footer small {
+  font-size: 16px;
+  font-weight: 600;
+}

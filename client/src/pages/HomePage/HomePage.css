@@ -1,0 +1,37 @@
+.HomePage {
+  height: 576px;
+  background-color: #e0ffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.HomePageTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.HomePageTextContainer h1 {
+  font-weight: 700;
+  margin: 0;
+  padding: 10px;
+  font-size: 32px;
+}
+
+.HomePageTextContainer p {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 20px;
+}
+
+.HomePageImageContainer {
+  display: grid;
+  place-items: center;
+}
+
+.HomePageImageContainer img {
+  border-radius: 8px;
+}
