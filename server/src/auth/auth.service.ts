@@ -10,7 +10,6 @@ import { UsersService } from 'src/users/users.service';
 import { hash, compare } from 'bcryptjs';
 import { CredentialsDto } from './dtos/credentials.dto';
 import { ConfigService } from '@nestjs/config';
-import { Request, Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -57,6 +56,9 @@ export class AuthService {
     );
 
     await this.userService.saveRefreshToken(foundUser.id, refreshToken);
+
+    console.log(foundUser.email);
+    console.log(foundUser.password);
 
     delete foundUser.password;
     delete foundUser.refreshTokens;

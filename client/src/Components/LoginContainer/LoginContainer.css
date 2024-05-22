@@ -88,7 +88,7 @@ form .txt-field {
   text-decoration: underline;
 }
 
-button[type="Submit"] {
+button[type="success"] {
   width: 100%;
   height: 50px;
   border: 1px solid;
@@ -98,7 +98,7 @@ button[type="Submit"] {
   cursor: pointer;
 }
 
-button[type="Submit"]:hover {
+button[type="success"]:hover {
   background: #429e9d;
   color: #e9f4fb;
   transition: 0.5s;
