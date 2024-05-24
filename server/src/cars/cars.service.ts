@@ -32,6 +32,7 @@ export class CarsService {
     if (filters.model) {
       filterConfig.where = { ...filterConfig.where, model: filters.model };
     }
+
     if (filters.orderBy) {
       if (filters.orderBy === 'year') filterConfig.order = { year: 'ASC' };
     }

@@ -24,24 +24,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 80px;
+  gap: 50px;
   border-radius: 10px;
 }
 
 .searchDiv input {
+  margin-right: 10px;
   padding-right: 5px;
   height: 25px;
   width: 200px;
 }
 
 .searchDiv button {
-  margin-left: 10px;
+  margin: 0px 10px;
   padding: 0px 5px;
   height: 25px;
 }
 
 .dropDownMenu {
-  width: 80px;
+  width: 90px;
   height: 25px;
 }
 
