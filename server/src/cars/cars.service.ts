@@ -10,17 +10,13 @@ import { CreateCarDto } from './dtos/create-car.dto';
 import { UpdateCarDto } from './dtos/update-car.dto';
 import { CarFilters } from './interfaces/filters-interface';
 import { CarinsuranceService } from 'src/carinsurance/carinsurance.service';
-import { CreateFeatureDto } from 'src/feature/dtos/create-feature.dto';
-import { FeatureService } from 'src/feature/feature.service';
 import { AddFeatureToCarDto } from './dtos/add-feature-car.dto';
-import { features } from 'process';
 
 @Injectable()
 export class CarsService {
   constructor(
     @InjectRepository(Car) private carRepo: Repository<Car>,
     private carInsurenceService: CarinsuranceService,
-    private featureService: FeatureService,
   ) {}
 
   async getAllCars(filters: CarFilters) {
@@ -40,7 +36,13 @@ export class CarsService {
       if (filters.orderBy === 'year') filterConfig.order = { year: 'ASC' };
     }
 
-    const cars = await this.carRepo.find(filterConfig);
+    const cars = await this.carRepo.find({
+      ...filterConfig,
+      relations: {
+        manufacturer: true,
+        carInsurance: true,
+      },
+    });
     const count = await this.carRepo.count();
 
     return {

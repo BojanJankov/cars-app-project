@@ -33,7 +33,7 @@ export class CarsController {
       orderBy,
     };
 
-    filters.maxResults = maxResults ? Number(maxResults) : 10;
+    filters.maxResults = maxResults ? Number(maxResults) : 20;
     filters.firstResult = firstResult ? Number(firstResult) - 1 : 0;
     return this.carsService.getAllCars(filters);
   }

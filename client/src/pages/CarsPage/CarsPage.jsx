@@ -1,29 +1,20 @@
 import { useEffect, useState } from "react";
 import "./CarsPage.css";
+import api from "../../Components/api";
 
 function CarsPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState([]);
-
-  const url = "https://car-data.p.rapidapi.com/cars?limit=10&page=0";
-
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "e21431883emshb3f2cc144967a45p192292jsn4e925c11773b",
-      "X-RapidAPI-Host": "car-data.p.rapidapi.com",
-    },
-  };
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(url, options);
-        const data = await response.json();
-        setData(data);
+        const response = await api.get("http://localhost:3000/api/cars");
+
+        setData(response.data);
         setIsLoading(false);
-        console.log(data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -47,7 +38,7 @@ function CarsPage() {
         </div>
         <div>
           <select name="searchByMenu" className="dropDownMenu">
-            <option value="none" selected disabled hidden>
+            <option value="none" disabled hidden>
               Search By
             </option>
             <option value="model">Name</option>
@@ -59,26 +50,34 @@ function CarsPage() {
       </div>
       <div className="cardsDiv">
         {isLoading ? <p className="loading">Loading...</p> : null}
-        {data.map((car) => (
-          <>
-            <div className="carCard">
-              <ul className="carCardList">
-                <li key={car.id} className="carName">
-                  {car.model}
-                </li>
-                <li key={car.make}>
-                  <strong>Brand:</strong> {car.make}
-                </li>
-                <li key={car.type}>
-                  <strong>Type:</strong> {car.type}
-                </li>
-                <li key={car.year}>
-                  <strong>Year:</strong> {car.year}
-                </li>
-              </ul>
-            </div>
-          </>
-        ))}
+        {data.cars
+          ? data.cars.map((car) => (
+              <div className="carCard">
+                <ul className="carCardList">
+                  <li key={car.id} className="carName">
+                    {car.make}
+                  </li>
+                  <li key="model">
+                    <strong>Model:</strong> {car.model}
+                  </li>
+                  <li key="year">
+                    <strong>Year:</strong> {car.year}
+                  </li>
+                  <li key={car.manufacturer.id}>
+                    <strong>Manufacturer:</strong> {car.manufacturer.name}
+                  </li>
+                  <li key={car.manufacturer.headquarters}>
+                    <strong>Headquarter:</strong>{" "}
+                    {car.manufacturer.headquarters}
+                  </li>
+                  <li key={car.carInsurance.policyNumber}>
+                    <strong>Policy number:</strong>{" "}
+                    {car.carInsurance.policyNumber}
+                  </li>
+                </ul>
+              </div>
+            ))
+          : null}
       </div>
     </section>
   );
