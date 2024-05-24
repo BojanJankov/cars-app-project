@@ -1,7 +1,7 @@
 .CarsPage {
   min-height: 576px;
   background-color: #e0ffff;
-  padding: 0 50px 30px 50px;
+  padding: 0 50px 22px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,4 +82,28 @@
   font-size: 22px;
   font-weight: 700;
   padding-bottom: 15px;
+}
+
+/* Pagination */
+
+.pagination {
+  margin-top: 10px;
+  padding: 20px 0px;
+  list-style: none;
+  display: flex;
+  margin-bottom: 0;
+}
+
+.pagination li {
+  cursor: pointer;
+}
+
+.pagination-item {
+  padding: 10px;
+  color: black;
+  background-color: #48d1cc;
+  border-radius: 10px;
+  margin: 5px;
+  text-decoration: none;
+  margin-bottom: 0;
 }

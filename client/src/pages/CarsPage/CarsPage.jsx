@@ -4,20 +4,22 @@ import api from "../../Components/api";
 
 function CarsPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState("");
+  const [result, setResult] = useState("11");
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get("http://localhost:3000/api/cars");
+        const response = await api.get(
+          `http://localhost:3000/api/cars?firstResult=${result}`
+        );
 
-        setData(response.data);
+        setData(response.data.cars);
         setIsLoading(false);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -31,8 +33,8 @@ function CarsPage() {
       const response = await api.get(
         `http://localhost:3000/api/cars?${query}=${search}&orderBy=${order}`
       );
-      setData(response.data);
-      console.log(response.data);
+      setData(response.data.cars);
+
       setSearch("");
       setIsLoading(false);
     } catch (error) {
@@ -83,8 +85,8 @@ function CarsPage() {
       </div>
       <div className="cardsDiv">
         {isLoading ? <p className="loading">Loading...</p> : null}
-        {data.cars
-          ? data.cars.map((car) => (
+        {data
+          ? data.map((car) => (
               <div className="carCard">
                 <ul className="carCardList">
                   <li key={car.id} className="carName">
@@ -111,6 +113,20 @@ function CarsPage() {
               </div>
             ))
           : null}
+      </div>
+
+      <div className="paginationDiv">
+        <ul className="pagination">
+          <li className="pagination-item">Prev</li>
+          <li className="pagination-item">1</li>
+          <li className="pagination-item">2</li>
+          <li className="pagination-item">3</li>
+          <li className="pagination-item">4</li>
+          <li className="pagination-item">5</li>
+          <li className="pagination-item">...</li>
+          <li className="pagination-item">10</li>
+          <li className="pagination-item">Next</li>
+        </ul>
       </div>
     </section>
   );
