@@ -46,6 +46,18 @@ function CarsPage() {
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = data.slice(firstPostIndex, lastPostIndex);
 
+  const prevPage = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage !== data.length / postsPerPage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <section className="CarsPage">
       <div className="filtersDiv">
@@ -122,6 +134,8 @@ function CarsPage() {
         totalPosts={data.length}
         postsPerPage={postsPerPage}
         setCurrentPage={setCurrentPage}
+        prevPage={prevPage}
+        nextPage={nextPage}
       />
     </section>
   );
