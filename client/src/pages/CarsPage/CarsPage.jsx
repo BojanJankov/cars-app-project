@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./CarsPage.css";
 import api from "../../Components/api";
+import Pagination from "../../Components/CarsPagePagination/Pagination";
 
 function CarsPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,15 +9,14 @@ function CarsPage() {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
   const [order, setOrder] = useState("");
-  const [result, setResult] = useState("11");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchCars = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get(
-          `http://localhost:3000/api/cars?firstResult=${result}`
-        );
+        const response = await api.get(`http://localhost:3000/api/cars`);
 
         setData(response.data.cars);
         setIsLoading(false);
@@ -41,6 +41,10 @@ function CarsPage() {
       console.log(error);
     }
   };
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = data.slice(firstPostIndex, lastPostIndex);
 
   return (
     <section className="CarsPage">
@@ -86,7 +90,7 @@ function CarsPage() {
       <div className="cardsDiv">
         {isLoading ? <p className="loading">Loading...</p> : null}
         {data
-          ? data.map((car) => (
+          ? currentPosts.map((car) => (
               <div className="carCard">
                 <ul className="carCardList">
                   <li key={car.id} className="carName">
@@ -114,20 +118,11 @@ function CarsPage() {
             ))
           : null}
       </div>
-
-      <div className="paginationDiv">
-        <ul className="pagination">
-          <li className="pagination-item">Prev</li>
-          <li className="pagination-item">1</li>
-          <li className="pagination-item">2</li>
-          <li className="pagination-item">3</li>
-          <li className="pagination-item">4</li>
-          <li className="pagination-item">5</li>
-          <li className="pagination-item">...</li>
-          <li className="pagination-item">10</li>
-          <li className="pagination-item">Next</li>
-        </ul>
-      </div>
+      <Pagination
+        totalPosts={data.length}
+        postsPerPage={postsPerPage}
+        setCurrentPage={setCurrentPage}
+      />
     </section>
   );
 }

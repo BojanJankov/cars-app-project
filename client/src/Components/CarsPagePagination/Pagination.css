@@ -1,0 +1,21 @@
+.pagination {
+  margin-top: 10px;
+  padding: 20px 0px;
+  list-style: none;
+  display: flex;
+  margin-bottom: 0;
+}
+
+.pagination li {
+  cursor: pointer;
+}
+
+.pagination-item {
+  padding: 10px;
+  color: black;
+  background-color: #48d1cc;
+  border-radius: 10px;
+  margin: 5px;
+  text-decoration: none;
+  margin-bottom: 0;
+}

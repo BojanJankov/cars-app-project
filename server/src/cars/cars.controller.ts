@@ -24,8 +24,6 @@ export class CarsController {
     @Query('make') make: string,
     @Query('model') model: string,
     @Query('orderBy') orderBy: 'year',
-    @Query('maxResults') maxResults: string,
-    @Query('firstResult') firstResult: string,
   ) {
     const filters: CarFilters = {
       make,
@@ -33,8 +31,6 @@ export class CarsController {
       orderBy,
     };
 
-    filters.maxResults = maxResults ? Number(maxResults) : 10;
-    filters.firstResult = firstResult ? Number(firstResult) - 1 : 0;
     return this.carsService.getAllCars(filters);
   }
 

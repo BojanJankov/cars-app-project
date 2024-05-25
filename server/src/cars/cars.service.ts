@@ -22,9 +22,6 @@ export class CarsService {
   async getAllCars(filters: CarFilters) {
     const filterConfig: FindManyOptions<Car> = {};
 
-    filterConfig.take = filters.maxResults;
-    filterConfig.skip = filters.firstResult;
-
     if (filters.make) {
       filterConfig.where = { make: filters.make };
     }
