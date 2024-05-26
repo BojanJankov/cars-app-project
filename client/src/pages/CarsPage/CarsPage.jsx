@@ -53,7 +53,7 @@ function CarsPage() {
   };
 
   const nextPage = () => {
-    if (currentPage !== data.length / postsPerPage) {
+    if (currentPage !== Math.ceil(data.length / postsPerPage)) {
       setCurrentPage(currentPage + 1);
     }
   };
