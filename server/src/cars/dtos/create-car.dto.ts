@@ -3,12 +3,12 @@ import {
   IsString,
   IsNumber,
   Length,
-  IsOptional,
   IsObject,
   ValidateNested,
-  IsArray,
 } from 'class-validator';
 import { CreateCarInsurenceDto } from 'src/carinsurance/dtos/create-carinsurence.dto';
+import { CreateManufacturerDto } from 'src/manufacturer/dtos/create-manufacturer.dto';
+import { Manufacturer } from 'src/manufacturer/entitites/manufacturer.entity';
 
 export class CreateCarDto {
   @IsString()

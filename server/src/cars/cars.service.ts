@@ -11,12 +11,14 @@ import { UpdateCarDto } from './dtos/update-car.dto';
 import { CarFilters } from './interfaces/filters-interface';
 import { CarinsuranceService } from 'src/carinsurance/carinsurance.service';
 import { AddFeatureToCarDto } from './dtos/add-feature-car.dto';
+import { ManufacturerService } from 'src/manufacturer/manufacturer.service';
 
 @Injectable()
 export class CarsService {
   constructor(
     @InjectRepository(Car) private carRepo: Repository<Car>,
     private carInsurenceService: CarinsuranceService,
+    private manufacturerService: ManufacturerService,
   ) {}
 
   async getAllCars(filters: CarFilters) {
@@ -118,7 +120,15 @@ export class CarsService {
 
     await this.carRepo.save(foundCar);
   }
-  async deleteCar(id: string) {
+  async deleteCar(id: string, carInsuranceId: string) {
+    const foundCar = await this.getCarById(id);
+
+    await this.carInsurenceService.deleteCarInsurence(carInsuranceId);
+
+    await this.carRepo.remove(foundCar);
+  }
+
+  async deleteCarWithOutCarInsurence(id: string) {
     const foundCar = await this.getCarById(id);
 
     await this.carRepo.remove(foundCar);

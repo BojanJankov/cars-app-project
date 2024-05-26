@@ -29,7 +29,10 @@ export class ManufacturerService {
         headquarters: filters.headquarters,
       };
     }
-    const manufacturers = await this.manufacturerRepo.find(filtersConfig);
+    const manufacturers = await this.manufacturerRepo.find({
+      ...filtersConfig,
+      relations: { cars: true },
+    });
     const count = await this.manufacturerRepo.count();
 
     return {
@@ -52,7 +55,7 @@ export class ManufacturerService {
     return foundManufacturer;
   }
 
-  createManufacturer(manufacturerData: CreateManufacturerDto) {
+  async createManufacturer(manufacturerData: CreateManufacturerDto) {
     const newManufacturer = this.manufacturerRepo.create({
       name: manufacturerData.name,
       headquarters: manufacturerData.headquarters,

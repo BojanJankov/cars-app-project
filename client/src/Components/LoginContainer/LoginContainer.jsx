@@ -28,7 +28,7 @@ function LoginContainer(props) {
 
       localStorage.setItem("userName", user.firstName);
 
-      navigate(-1);
+      // navigate(-1);
     } catch (error) {
       console.log(error);
       if (error) {

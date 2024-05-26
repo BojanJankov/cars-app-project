@@ -8,13 +8,16 @@ import {
   Delete,
   HttpCode,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dtos/create-car.dto';
 import { UpdateCarDto } from './dtos/update-car.dto';
 import { CarFilters } from './interfaces/filters-interface';
 import { AddFeatureToCarDto } from './dtos/add-feature-car.dto';
+import { AuthGuard } from 'src/auth/auth.quard';
 
+@UseGuards(AuthGuard)
 @Controller('cars')
 export class CarsController {
   constructor(private carsService: CarsService) {}
@@ -70,9 +73,17 @@ export class CarsController {
     return this.carsService.deleteFeatureOfCar(carId, featureId);
   }
 
-  @Delete('/:id')
+  @Delete('/:id/carInsurence/:carInsurenceId')
   @HttpCode(204)
-  deleteCar(@Param('id') id: string) {
-    return this.carsService.deleteCar(id);
+  deleteCar(
+    @Param('id') id: string,
+    @Param('carInsurenceId') carInsurenceId: string,
+  ) {
+    return this.carsService.deleteCar(id, carInsurenceId);
+  }
+
+  @Delete('/:id')
+  deleteCarWithOutInsurence(@Param('id') id: string) {
+    return this.carsService.deleteCarWithOutCarInsurence(id);
   }
 }

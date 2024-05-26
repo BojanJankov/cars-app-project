@@ -14,11 +14,20 @@ function CarsPage() {
   const [postsPerPage, setPostsPerPage] = useState(10);
   const { accessToken } = useContext(AuthContext);
 
+  const config = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+
   useEffect(() => {
     const fetchCars = async () => {
       try {
         setIsLoading(true);
-        const response = await api.get(`http://localhost:3000/api/cars`);
+        const response = await api.get(
+          `http://localhost:3000/api/cars`,
+          config
+        );
+
+        console.log(response.data.cars);
 
         setData(response.data.cars);
         setIsLoading(false);
@@ -101,11 +110,6 @@ function CarsPage() {
             <option value="make">Name</option>
             <option value="model">Model</option>
           </select>
-          <button className="searchButton" type="button" onClick={serachFetch}>
-            Search
-          </button>
-        </div>
-        <div>
           <select
             name="orderBy"
             className="dropDownMenu"
@@ -117,6 +121,9 @@ function CarsPage() {
             <option value="year">Year</option>
             <option value="none">None</option>
           </select>
+          <button className="searchButton" type="button" onClick={serachFetch}>
+            Search
+          </button>
         </div>
       </div>
       <div className="cardsDiv">
