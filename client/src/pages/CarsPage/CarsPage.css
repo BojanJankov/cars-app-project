@@ -84,4 +84,11 @@
   padding-bottom: 15px;
 }
 
-/* Pagination */
+.forbiddenContainer {
+  display: grid;
+  place-items: center;
+}
+
+.forbiddenContainer p {
+  font-size: 22px;
+}

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./CarsPage.css";
 import api from "../../Components/api";
 import Pagination from "../../Components/CarsPagePagination/Pagination";
+import { AuthContext } from "../../Components/AuthContext";
 
 function CarsPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -11,6 +12,7 @@ function CarsPage() {
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
+  const { accessToken } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -26,6 +28,15 @@ function CarsPage() {
     };
     fetchCars();
   }, []);
+
+  useEffect(() => {
+    if (accessToken === null) {
+      const timeout = setTimeout(() => {
+        window.location.href = "/login";
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [accessToken]);
 
   const serachFetch = async () => {
     try {
@@ -57,6 +68,15 @@ function CarsPage() {
       setCurrentPage(currentPage + 1);
     }
   };
+
+  if (accessToken === null) {
+    return (
+      <div className="forbiddenContainer">
+        <h1>You must be logged in before viewing this page!</h1>
+        <p>You'll be redirected in 2 seconds</p>
+      </div>
+    );
+  }
 
   return (
     <section className="CarsPage">
