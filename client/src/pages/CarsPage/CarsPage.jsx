@@ -3,6 +3,7 @@ import "./CarsPage.css";
 import api from "../../Components/api";
 import Pagination from "../../Components/CarsPagePagination/Pagination";
 import { AuthContext } from "../../Components/AuthContext";
+import { Link } from "react-router-dom";
 
 function CarsPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -109,6 +110,8 @@ function CarsPage() {
             </option>
             <option value="make">Name</option>
             <option value="model">Model</option>
+            <option value="manufacturer">Manufacturer</option>
+            <option value="petrol">Petrol</option>
           </select>
           <select
             name="orderBy"
@@ -125,35 +128,41 @@ function CarsPage() {
             Search
           </button>
         </div>
+        <div className="addCarDiv">
+          <Link to="/addCar">
+            <button className="addCarButton">Add your car</button>
+          </Link>
+        </div>
       </div>
       <div className="cardsDiv">
         {isLoading ? <p className="loading">Loading...</p> : null}
         {data
           ? currentPosts.map((car) => (
-              <div className="carCard">
-                <ul className="carCardList">
-                  <li key={car.id} className="carName">
-                    {car.make}
-                  </li>
-                  <li key="model">
-                    <strong>Model:</strong> {car.model}
-                  </li>
-                  <li key="year">
-                    <strong>Year:</strong> {car.year}
-                  </li>
-                  <li key={car.manufacturer.id}>
-                    <strong>Manufacturer:</strong> {car.manufacturer.name}
-                  </li>
-                  <li key={car.manufacturer.headquarters}>
-                    <strong>Headquarter:</strong>{" "}
-                    {car.manufacturer.headquarters}
-                  </li>
-                  <li key={car.carInsurance.policyNumber}>
-                    <strong>Policy number:</strong>{" "}
-                    {car.carInsurance.policyNumber}
-                  </li>
-                </ul>
-              </div>
+              <>
+                <div className="carCard">
+                  <ul className="carCardList">
+                    <li key={car.id} className="carName">
+                      {car.make}
+                    </li>
+                    <li key="model">
+                      <strong>Model:</strong> {car.model}
+                    </li>
+                    <li key="year">
+                      <strong>Year:</strong> {car.year}
+                    </li>
+                    <li key={car.manufacturer}>
+                      <strong>Manufacturer:</strong> {car.manufacturer}
+                    </li>
+                    <li key={car.petrol}>
+                      <strong>Petrol:</strong> {car.petrol}
+                    </li>
+                    <li key={car.carInsurance.policyNumber}>
+                      <strong>Policy number:</strong>{" "}
+                      {car.carInsurance.policyNumber}
+                    </li>
+                  </ul>
+                </div>
+              </>
             ))
           : null}
       </div>

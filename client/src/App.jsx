@@ -10,6 +10,7 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import AuthProvider from "./Components/AuthContext";
+import AddCarPage from "./pages/AddCarPage/AddCarPage";
 
 function App() {
   const title = "Cars App";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/addCar" element={<AddCarPage />} />
         </Routes>
         <Footer />
       </AuthProvider>

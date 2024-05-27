@@ -3,14 +3,11 @@ import { ValidateNested } from 'class-validator';
 import { CreateCarInsurenceDto } from 'src/carinsurance/dtos/create-carinsurence.dto';
 import { CarInsurance } from 'src/carinsurance/entities/car-insurance.entity';
 import { Feature } from 'src/feature/entities/feature.entity';
-import { CreateManufacturerDto } from 'src/manufacturer/dtos/create-manufacturer.dto';
-import { Manufacturer } from 'src/manufacturer/entitites/manufacturer.entity';
+
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToMany,
-  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -27,11 +24,13 @@ export class Car {
   model: string;
 
   @Column()
-  year: number;
+  year: string;
 
-  @ManyToOne(() => Manufacturer, (manufacturer) => manufacturer.cars)
-  @JoinColumn()
-  manufacturer: Manufacturer;
+  @Column()
+  manufacturer: string;
+
+  @Column()
+  petrol: string;
 
   @ValidateNested()
   @Type(() => CreateCarInsurenceDto)

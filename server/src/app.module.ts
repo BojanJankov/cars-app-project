@@ -8,7 +8,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CarsModule } from './cars/cars.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ManufacturerModule } from './manufacturer/manufacturer.module';
 import { CarinsuranceModule } from './carinsurance/carinsurance.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
@@ -34,7 +33,6 @@ import { AuthMiddleware } from './auth/auth.middleware';
       },
     }),
     CarsModule,
-    ManufacturerModule,
     CarinsuranceModule,
     UsersModule,
     AuthModule,

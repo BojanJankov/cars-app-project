@@ -7,8 +7,6 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { CreateCarInsurenceDto } from 'src/carinsurance/dtos/create-carinsurence.dto';
-import { CreateManufacturerDto } from 'src/manufacturer/dtos/create-manufacturer.dto';
-import { Manufacturer } from 'src/manufacturer/entitites/manufacturer.entity';
 
 export class CreateCarDto {
   @IsString()
@@ -19,10 +17,15 @@ export class CreateCarDto {
   model: string;
 
   @IsString()
+  @Length(2, 20)
   manufacturer: string;
 
-  @IsNumber()
-  year: number;
+  @IsString()
+  @Length(2, 20)
+  petrol: string;
+
+  @IsString()
+  year: string;
 
   @IsObject()
   @ValidateNested()

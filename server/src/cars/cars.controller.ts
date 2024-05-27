@@ -26,12 +26,16 @@ export class CarsController {
   getAllCars(
     @Query('make') make: string,
     @Query('model') model: string,
+    @Query('manufacturer') manufacturer: string,
+    @Query('petrol') petrol: string,
     @Query('orderBy') orderBy: 'year',
   ) {
     const filters: CarFilters = {
       make,
       model,
       orderBy,
+      petrol,
+      manufacturer,
     };
 
     return this.carsService.getAllCars(filters);

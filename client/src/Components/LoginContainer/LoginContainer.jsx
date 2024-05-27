@@ -62,7 +62,7 @@ function LoginContainer(props) {
   return (
     <div className="login-container">
       <h1>Login</h1>
-      <form action="" method="POST">
+      <form action="" method="POST" className="loginForm">
         <div className="txt-field">
           <input
             type="text"

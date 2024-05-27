@@ -71,18 +71,18 @@
   transition: 0.5s;
 }
 
-.login-container form {
+.loginForm {
   padding: 0 40px;
   box-sizing: border-box;
 }
 
-form .txt-field {
+.loginForm .txt-field {
   position: relative;
   border-bottom: 2px solid black;
   margin: 30px 0;
 }
 
-.txt-field input {
+.loginForm .txt-field input {
   width: 100%;
   padding: 0 5px;
   height: 40px;
@@ -92,7 +92,7 @@ form .txt-field {
   outline: none;
 }
 
-.txt-field label {
+.loginForm .txt-field label {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -102,7 +102,7 @@ form .txt-field {
   pointer-events: none;
 }
 
-.txt-field span::before {
+.loginForm .txt-field span::before {
   content: "";
   position: absolute;
   top: 40px;

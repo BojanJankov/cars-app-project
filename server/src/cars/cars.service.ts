@@ -5,20 +5,18 @@ import {
 } from '@nestjs/common';
 import { Car } from './entities/car.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Feature, FindManyOptions, Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { CreateCarDto } from './dtos/create-car.dto';
 import { UpdateCarDto } from './dtos/update-car.dto';
 import { CarFilters } from './interfaces/filters-interface';
 import { CarinsuranceService } from 'src/carinsurance/carinsurance.service';
 import { AddFeatureToCarDto } from './dtos/add-feature-car.dto';
-import { ManufacturerService } from 'src/manufacturer/manufacturer.service';
 
 @Injectable()
 export class CarsService {
   constructor(
     @InjectRepository(Car) private carRepo: Repository<Car>,
     private carInsurenceService: CarinsuranceService,
-    private manufacturerService: ManufacturerService,
   ) {}
 
   async getAllCars(filters: CarFilters) {
@@ -32,6 +30,17 @@ export class CarsService {
       filterConfig.where = { ...filterConfig.where, model: filters.model };
     }
 
+    if (filters.manufacturer) {
+      filterConfig.where = {
+        ...filterConfig.where,
+        manufacturer: filters.manufacturer,
+      };
+    }
+
+    if (filters.petrol) {
+      filterConfig.where = { ...filterConfig.where, petrol: filters.petrol };
+    }
+
     if (filters.orderBy) {
       if (filters.orderBy === 'year') filterConfig.order = { year: 'ASC' };
     }
@@ -39,7 +48,6 @@ export class CarsService {
     const cars = await this.carRepo.find({
       ...filterConfig,
       relations: {
-        manufacturer: true,
         carInsurance: true,
       },
     });
@@ -55,7 +63,6 @@ export class CarsService {
     const foundCar = await this.carRepo.findOne({
       where: { id },
       relations: {
-        manufacturer: true,
         carInsurance: true,
         features: true,
       },
@@ -73,8 +80,9 @@ export class CarsService {
       const newCar = await this.carRepo.save({
         make: data.make,
         model: data.model,
-        manufacturer: { id: data.manufacturer },
         year: data.year,
+        manufacturer: data.manufacturer,
+        petrol: data.petrol,
       });
 
       await this.carInsurenceService.createCarInsurence({
@@ -82,7 +90,7 @@ export class CarsService {
         car: newCar.id,
       });
 
-      return newCar;
+      return { newCar };
     } catch (error) {
       throw new BadRequestException(error.message);
     }
