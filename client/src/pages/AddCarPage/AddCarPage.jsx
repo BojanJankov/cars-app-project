@@ -13,6 +13,7 @@ function AddCarPage() {
   const [policyNumberInput, setPolicyNumberInput] = useState("");
   const [providerInput, setProviderInput] = useState("");
   const [coverageDetalis, setCoverageDetalis] = useState("");
+  const [statusData, setStatusData] = useState("");
 
   const handleAddCar = async (event) => {
     event.preventDefault();
@@ -29,7 +30,9 @@ function AddCarPage() {
           coverageDetalis: coverageDetalis,
         },
       });
-      //
+      if (response.status === 201) {
+        setStatusData("Your car is successfully added!");
+      }
       setMake("");
       setModel("");
       setYear("");
@@ -155,6 +158,7 @@ function AddCarPage() {
         <button name="submit" type="Submit" onClick={handleAddCar}>
           Add your car
         </button>
+        <p className="message-status">{statusData}</p>
       </div>
       <div className="viewAddedCar">
         <div className="carCard">
