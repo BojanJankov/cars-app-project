@@ -1,10 +1,11 @@
 .CarsPage {
   min-height: 576px;
   background-color: #e0ffff;
-  padding: 0 50px 22px 50px;
+  padding: 0 20px 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
 }
 
 .CarsPage .loading {
@@ -81,8 +82,15 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  min-height: 400px;
 }
-
+.zero-data-length {
+  margin-top: 170px;
+  font-size: 24px;
+}
+.zero-data-length span {
+  color: #429e9d;
+}
 .carCard {
   padding: 10px;
   background-color: #48d1cc;

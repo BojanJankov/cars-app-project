@@ -55,13 +55,14 @@ export class AuthService {
       { secret: this.configService.get('REFRESH_TOKEN_SECRET') },
     );
 
+    console.log('Refresh token od login', refreshToken);
+
     await this.userService.saveRefreshToken(foundUser.id, refreshToken);
 
-    console.log(foundUser.email);
-    console.log(foundUser.password);
+    // console.log(foundUser.email);
+    // console.log(foundUser.password);
 
     delete foundUser.password;
-    delete foundUser.refreshTokens;
 
     return {
       user: foundUser,

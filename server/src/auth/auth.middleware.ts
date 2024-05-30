@@ -13,6 +13,8 @@ export class AuthMiddleware implements NestMiddleware {
   async use(req: any, res: any, next: () => void) {
     const refreshToken = req.headers['refresh-token'];
 
+    console.log(refreshToken);
+
     if (refreshToken) {
       try {
         const { id } = await this.jwtService.verifyAsync(
@@ -24,9 +26,13 @@ export class AuthMiddleware implements NestMiddleware {
 
         const foundUser = await this.usersService.getUserbyId(id);
 
+        console.log(foundUser);
+
         const tokenExists = foundUser.refreshTokens.some(
           (token) => token === refreshToken,
         );
+
+        console.log(tokenExists);
 
         if (!tokenExists) throw new Error();
 
@@ -53,6 +59,7 @@ export class AuthMiddleware implements NestMiddleware {
 
         res.set('access-token', newAccessToken);
         res.set('refresh-token', newRefreshToken);
+        res.setHeader('Access-Control-Expose-Headers', '*');
       } catch (error) {
         console.log(error);
       }

@@ -136,35 +136,40 @@ function CarsPage() {
       </div>
       <div className="cardsDiv">
         {isLoading ? <p className="loading">Loading...</p> : null}
-        {data
-          ? currentPosts.map((car) => (
-              <>
-                <div className="carCard">
-                  <ul className="carCardList">
-                    <li key={car.id} className="carName">
-                      {car.make}
-                    </li>
-                    <li key="model">
-                      <strong>Model:</strong> {car.model}
-                    </li>
-                    <li key="year">
-                      <strong>Year:</strong> {car.year}
-                    </li>
-                    <li key={car.manufacturer}>
-                      <strong>Manufacturer:</strong> {car.manufacturer}
-                    </li>
-                    <li key={car.petrol}>
-                      <strong>Petrol:</strong> {car.petrol}
-                    </li>
-                    <li key={car.carInsurance.policyNumber}>
-                      <strong>Policy number:</strong>{" "}
-                      {car.carInsurance.policyNumber}
-                    </li>
-                  </ul>
-                </div>
-              </>
-            ))
-          : null}
+        {data ? (
+          currentPosts.map((car) => (
+            <>
+              <div className="carCard">
+                <ul className="carCardList">
+                  <li key={car.id} className="carName">
+                    {car.make}
+                  </li>
+                  <li key="model">
+                    <strong>Model:</strong> {car.model}
+                  </li>
+                  <li key="year">
+                    <strong>Year:</strong> {car.year}
+                  </li>
+                  <li key={car.manufacturer}>
+                    <strong>Manufacturer:</strong> {car.manufacturer}
+                  </li>
+                  <li key={car.petrol}>
+                    <strong>Petrol:</strong> {car.petrol}
+                  </li>
+                  <li key={car.carInsurance.policyNumber}>
+                    <strong>Policy number:</strong>{" "}
+                    {car.carInsurance.policyNumber}
+                  </li>
+                </ul>
+              </div>
+            </>
+          ))
+        ) : (
+          <h1 className="zero-data-length">
+            There is no cars in our Cars app, click <span>Add your car </span>
+            button to add a car!
+          </h1>
+        )}
       </div>
       <Pagination
         totalPosts={data.length}

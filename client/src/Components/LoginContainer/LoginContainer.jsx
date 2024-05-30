@@ -8,7 +8,6 @@ function LoginContainer(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { logout, accessToken, login } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -22,7 +21,11 @@ function LoginContainer(props) {
       const user = response.data;
 
       const accessToken = response.headers["access-token"];
+      const refreshToken = response.headers["refresh-token"];
 
+      console.log(refreshToken);
+      console.log(accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("accessToken", accessToken);
       login(accessToken);
 

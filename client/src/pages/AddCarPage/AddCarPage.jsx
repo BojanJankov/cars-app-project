@@ -161,10 +161,10 @@ function AddCarPage() {
         <p className="message-status">{statusData}</p>
       </div>
       <div className="viewAddedCar">
-        <div className="carCard">
+        <div className="addCarCard">
           {data ? (
-            <ul className="carCardList">
-              <li key={data.id} className="carName">
+            <ul className="addCarCardList">
+              <li key={data.id} className="addCarName">
                 {data.make}
               </li>
               <li key="model">

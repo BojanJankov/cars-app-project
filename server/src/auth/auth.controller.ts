@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  Req,
-  Res,
-} from '@nestjs/common';
+import { Body, Controller, Post, Req, Res } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 import { AuthService } from './auth.service';
 import { CredentialsDto } from './dtos/credentials.dto';
@@ -31,7 +23,7 @@ export class AuthController {
 
     response.set('access-token', accessToken);
     response.set('refresh-token', refreshToken);
-    response.setHeader('Access-Control-Expose-Headers', 'access-token');
+    response.setHeader('Access-Control-Expose-Headers', '*');
 
     return response.json(user);
   }
