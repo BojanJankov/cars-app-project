@@ -33,6 +33,7 @@ function AddCarPage() {
       if (response.status === 201) {
         setStatusData("Your car is successfully added!");
       }
+
       setMake("");
       setModel("");
       setYear("");

@@ -26,7 +26,7 @@ export class AuthMiddleware implements NestMiddleware {
 
         const foundUser = await this.usersService.getUserbyId(id);
 
-        console.log(foundUser);
+        await this.usersService.saveRefreshToken(foundUser.id, refreshToken);
 
         const tokenExists = foundUser.refreshTokens.some(
           (token) => token === refreshToken,
@@ -46,6 +46,7 @@ export class AuthMiddleware implements NestMiddleware {
           },
         );
 
+        console.log('New refresh token - ', newRefreshToken);
         const newAccessToken = await this.jwtService.signAsync({
           id: foundUser.id,
         });

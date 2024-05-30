@@ -13,7 +13,7 @@ import { ConfigService } from '@nestjs/config';
         return {
           secret: configService.get('ACCESS_TOKEN_SECRET'),
           signOptions: {
-            expiresIn: '10m',
+            expiresIn: '5m',
           },
         };
       },

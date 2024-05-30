@@ -63,6 +63,7 @@ export class AuthService {
     // console.log(foundUser.password);
 
     delete foundUser.password;
+    delete foundUser.refreshTokens;
 
     return {
       user: foundUser,

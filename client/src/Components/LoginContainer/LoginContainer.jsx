@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../AuthContext";
 import "./LoginContainer.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import api from "../api";
 
 function LoginContainer(props) {
@@ -18,18 +18,14 @@ function LoginContainer(props) {
         password,
       });
 
-      const user = response.data;
-
       const accessToken = response.headers["access-token"];
       const refreshToken = response.headers["refresh-token"];
 
-      console.log(refreshToken);
-      console.log(accessToken);
+      // console.log(refreshToken);
+      // console.log(accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("accessToken", accessToken);
       login(accessToken);
-
-      localStorage.setItem("userName", user.firstName);
 
       // navigate(-1);
     } catch (error) {
