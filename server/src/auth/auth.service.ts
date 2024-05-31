@@ -59,9 +59,6 @@ export class AuthService {
 
     await this.userService.saveRefreshToken(foundUser.id, refreshToken);
 
-    // console.log(foundUser.email);
-    // console.log(foundUser.password);
-
     delete foundUser.password;
     delete foundUser.refreshTokens;
 

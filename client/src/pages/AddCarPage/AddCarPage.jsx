@@ -2,6 +2,8 @@ import "./AddCarPage.css";
 import api from "../../Components/api";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddCarPage() {
   const [data, setData] = useState({});
@@ -55,6 +57,10 @@ function AddCarPage() {
         setPolicyNumberInput("");
         setProviderInput("");
         setCoverageDetalis("");
+        toast.error("Invalid car informations, enter valid informations!", {
+          position: "bottom-left",
+          autoClose: 3000,
+        });
       }
     }
   };
@@ -189,6 +195,19 @@ function AddCarPage() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     </section>
   );
 }
