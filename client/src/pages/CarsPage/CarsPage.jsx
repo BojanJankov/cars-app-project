@@ -105,7 +105,7 @@ function CarsPage() {
             className="dropDownMenu"
             onChange={(event) => setQuery(event.target.value)}
           >
-            <option defaultValue="none" selected disabled hidden>
+            <option defaultValue="none" disabled hidden>
               Search By
             </option>
             <option value="make">Name</option>
@@ -118,7 +118,7 @@ function CarsPage() {
             className="dropDownMenu"
             onChange={(event) => setOrder(event.target.value)}
           >
-            <option defaultValue="none" selected disabled hidden>
+            <option defaultValue="none" disabled hidden>
               Order By
             </option>
             <option value="year">Year</option>
@@ -138,31 +138,27 @@ function CarsPage() {
         {isLoading ? <p className="loading">Loading...</p> : null}
         {data ? (
           currentPosts.map((car) => (
-            <>
-              <div className="carCard">
-                <ul className="carCardList">
-                  <li key={car.id} className="carName">
-                    {car.make}
-                  </li>
-                  <li key="model">
-                    <strong>Model:</strong> {car.model}
-                  </li>
-                  <li key="year">
-                    <strong>Year:</strong> {car.year}
-                  </li>
-                  <li key={car.manufacturer}>
-                    <strong>Manufacturer:</strong> {car.manufacturer}
-                  </li>
-                  <li key={car.petrol}>
-                    <strong>Petrol:</strong> {car.petrol}
-                  </li>
-                  <li key={car.carInsurance.policyNumber}>
-                    <strong>Policy number:</strong>{" "}
-                    {car.carInsurance.policyNumber}
-                  </li>
-                </ul>
-              </div>
-            </>
+            <div className="carCard" key={car.id}>
+              <ul className="carCardList">
+                <li className="carName">{car.make}</li>
+                <li>
+                  <strong>Model:</strong> {car.model}
+                </li>
+                <li>
+                  <strong>Year:</strong> {car.year}
+                </li>
+                <li>
+                  <strong>Manufacturer:</strong> {car.manufacturer}
+                </li>
+                <li>
+                  <strong>Petrol:</strong> {car.petrol}
+                </li>
+                <li>
+                  <strong>Policy number:</strong>{" "}
+                  {car.carInsurance.policyNumber}
+                </li>
+              </ul>
+            </div>
           ))
         ) : (
           <h1 className="zero-data-length">

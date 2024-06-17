@@ -170,20 +170,18 @@ function AddCarPage() {
       <div className="viewAddedCar">
         <div className="addCarCard">
           {data ? (
-            <ul className="addCarCardList">
-              <li key={data.id} className="addCarName">
-                {data.make}
-              </li>
-              <li key="model">
+            <ul className="addCarCardList" key={data.id}>
+              <li className="addCarName">{data.make}</li>
+              <li>
                 <strong>Model:</strong> {data.model}
               </li>
-              <li key="year">
+              <li>
                 <strong>Year:</strong> {data.year}
               </li>
-              <li key={data.manufacturer}>
+              <li>
                 <strong>Manufacturer:</strong> {data.manufacturer}
               </li>
-              <li key={data.petrol}>
+              <li>
                 <strong>Petrol:</strong> {data.petrol}
               </li>
             </ul>
